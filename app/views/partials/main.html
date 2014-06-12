@@ -1,0 +1,16 @@
+<div ng-include="'partials/navbar'"></div>
+
+<div id="page-main" class="jumbotron">
+    <h1>Deep Space</h1>
+    <p class="lead">
+        <img src="images/yeoman.png" alt="I'm Yeoman"><br>
+        Glad you back, lad'!
+    </p>
+    <div ng-if="!currentUser" class="btn-group">
+        <a class="btn btn-lg btn-success" ng-href="/signup">Register</a>
+        <a class="btn btn-lg btn-primary" ng-href="/login">Login</a>
+    </div>
+    <div ng-if="currentUser">
+        <a class="btn btn-lg btn-success" ng-href="#">Play</a>
+    </div>
+</div>

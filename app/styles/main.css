@@ -1,0 +1,28 @@
+#page-main a.btn{
+    width: 150px;
+    border: 1px solid gray;
+    transition: 0.25s all;
+}
+
+#page-main a.btn:first-child{
+    background: black;
+    border: 3px skyblue solid;
+    border-right: 0;
+    color: skyblue;
+    border-bottom-left-radius: 65px;
+    border-top-left-radius: 65px;
+}
+
+#page-main a.btn:last-child{
+    background: black;
+    border: 3px skyblue solid;
+    border-left: 0;
+    color: skyblue;
+    border-bottom-right-radius: 65px;
+    border-top-right-radius: 65px;
+}
+
+#page-main a.btn:hover{
+    background: skyblue;
+    color: black;
+}
