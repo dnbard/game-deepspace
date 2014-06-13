@@ -3,10 +3,53 @@ body {
     padding-top: 20px;
     padding-bottom: 20px;
     background: black !important;
+    font-family: 'Poiret One', cursive;
+    font-size: large;
 }
 
 html{
     background: black;
+}
+
+hr.dp{
+    border-color: skyblue;
+}
+
+input.form-control{
+    text-align: center;
+    background: black;
+    color: skyblue;
+    font-size: 16pt;
+    border: 3px solid skyblue;
+    padding: 20px 12px;
+    border-radius: 65px;
+}
+
+.has-error .help-block, .has-error .control-label, .has-error .radio, .has-error .checkbox, .has-error .radio-inline, .has-error .checkbox-inline{
+    color: lightcoral;
+    font-size: 18pt;
+    font-weight: bold;
+    margin: 28px 0;
+    padding-bottom: 4px;
+}
+
+.nav-pills > li > a{
+    border: 3px solid transparent;
+}
+
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus{
+    color: skyblue;
+    background-color: black;
+    border: 3px solid skyblue;
+    border-radius: 65px;
+    transition: 0.25s all;
+}
+
+.nav > li > a:hover, .nav > li > a:focus{
+    text-decoration: none;
+    background-color: black;
+    border-bottom: 3px solid;
+    border-radius: 65px;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -17,10 +60,6 @@ html{
   padding-right: 15px;
 }
 
-/* Custom page header */
-.header {
-  border-bottom: 1px solid #e5e5e5;
-}
 /* Make the masthead heading the same height as the navigation */
 .header h3 {
   margin-top: 0;
@@ -50,15 +89,6 @@ a:hover{
     text-decoration: none;
 }
 
-/* Main marketing message and sign up button */
-#page-main.jumbotron {
-    text-align: center;
-    border: 3px solid skyblue;
-    background: black;
-    color: white;
-    border-radius: 35px;
-    border-top-right-radius: 2px;
-}
 .jumbotron .btn {
   font-size: 21px;
   padding: 14px 24px;

@@ -5,10 +5,10 @@ angular.module('evolutionApp')
     $scope.menu = [{
       'title': 'Home',
       'link': '/'
-    }, {
+    }/*, {
       'title': 'Account',
       'link': '/account'
-    }];
+    }*/];
     
     $scope.logout = function() {
       Auth.logout()
