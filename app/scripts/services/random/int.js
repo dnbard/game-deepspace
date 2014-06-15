@@ -4,9 +4,13 @@ angular.module('evolutionApp')
     .factory('IntRandom', function () {
         function get(){
             if (arguments.length === 0){
-                return;
+                return getRandomInt.apply(this, [0, 99]);
+            } else if (arguments.length === 1){
+                return getRandomInt.apply(this, [0, arguments[0]]);
             } else if (arguments.length === 2){
                 return getRandomInt.apply(this, arguments);
+            } else {
+                throw new Error('Wrong arguments for IntRandom.get() function');
             }
         }
 

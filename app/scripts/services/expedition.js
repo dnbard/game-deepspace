@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('evolutionApp')
-    .factory('Expedition', function (Starship, IntRandom, SolarRandom) {
+    .factory('Expedition', function (Starship, IntRandom, StringRandom) {
         var instance = null;
 
         function getInstance(){
@@ -18,7 +18,7 @@ angular.module('evolutionApp')
             this.colonists = IntRandom.get(1500, 2000);
             this.droids = IntRandom.get(2, 4);
 
-            this.destination = SolarRandom.get();
+            this.destination = StringRandom.solar();
         }
 
         return { getInstance: getInstance };
