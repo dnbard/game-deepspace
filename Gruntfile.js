@@ -57,10 +57,10 @@ module.exports = function (grunt) {
       mochaTest: {
         files: ['test/server/{,*/}*.js'],
         tasks: ['env:test', 'mochaTest']
-      },
-      jsTest: {
-        files: ['test/client/spec/{,*/}*.js'],
-        tasks: ['newer:jshint:test', 'karma']
+//      },
+//      jsTest: {
+//        files: ['test/client/spec/{,*/}*.js'],
+//        tasks: ['newer:jshint:test', 'karma']
       },
       styles: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.css'],

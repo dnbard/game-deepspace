@@ -25,6 +25,11 @@ angular.module('evolutionApp', [
         controller: 'SettingsCtrl',
         authenticate: true
       })
+      .when('/game', {
+        templateUrl: 'partials/game',
+        controller: 'GameCtrl',
+        authenticate: true
+      })
       .otherwise({
         redirectTo: '/'
       });

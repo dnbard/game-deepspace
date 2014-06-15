@@ -13,14 +13,27 @@
     color: black;
 }
 
-.btn-group > .btn-dp:first-child{
+.btn-group{
+    display: block;
+}
+
+.inlineblock{
+    display: inline-block;
+}
+
+.btn-group > .btn-dp{
+    border-left: 0;
     border-right: 0;
+}
+
+.btn-group > .btn-dp:first-child{
+    border-left: 3px solid skyblue;
     border-bottom-left-radius: 65px;
     border-top-left-radius: 65px;
 }
 
 .btn-group > .btn-dp:last-child{
-    border-left: 0;
+    border-right: 3px solid skyblue;
     border-bottom-right-radius: 65px;
     border-top-right-radius: 65px;
 }

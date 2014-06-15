@@ -6,11 +6,11 @@
         <img src="images/yeoman.png" alt="I'm Yeoman"><br>
         Glad you back, lad'!
     </p>
-    <div ng-if="!currentUser" class="btn-group">
+    <div ng-if="!currentUser" class="btn-group inlineblock">
         <a class="btn btn-dp" ng-href="/signup">Register</a>
         <a class="btn btn-dp" ng-href="/login">Login</a>
     </div>
     <div ng-if="currentUser">
-        <a class="btn btn-dp" ng-href="#">Play</a>
+        <a class="btn btn-dp" ng-href="/game">Play</a>
     </div>
 </div>

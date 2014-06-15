@@ -1,0 +1,17 @@
+<div ng-include="'partials/navbar'"></div>
+
+<div class="page" ng-if="page == 'start'">
+    <div class="header-caption">EXPEDITION</div>
+    <div class="row" style="display: none;">
+        <div class="col-md-3 text-right">Ship name</div>
+        <div class="col-md-6">
+            <input class="form-control dp" ng-model="starship.name" />
+        </div>
+    </div>
+    <p><b>{{currentUser.name}}</b>, a new era of struggle and oppurtunity awaits you. The <b>Starship {{starship.name}}</b> started its journey to {{expedition.destination}} system. As a captain of <b>{{starship.name}}</b> you must scout <b>{{expedition.destination}} solar system</b> and find a proper planet to colonize.</p>
+    <p>{{starship.name}} have <b>{{expedition.colonists}} colonists</b> on board, <b>{{expedition.droids}} exploration droids</b> and set of tools to create a new colony on unknown planet.</p>
+    <p><b>{{starship.name}}</b> is going to reach borders of <b>{{expedition.destination}}</b> in 2 months.</p>
+    <div class="btn-group text-right">
+        <button class="btn btn-dp">Continue</button>
+    </div>
+</div>
