@@ -1,15 +1,11 @@
 'use strict';
 
 angular.module('evolutionApp')
-    .factory('ImageCache', function ($q, $http) {
-        var instance = null;
+    .factory('ImageCache', function ($q, $http, DB) {
+        var database = new DB();
 
         function ImagesCache(instanceName){
             instanceName = instanceName || 'default/';
-
-            function queryDb(id){
-                return null;
-            }
 
             function saveImageToDb(url, image){
 
@@ -39,12 +35,12 @@ angular.module('evolutionApp')
                     throw new Error('Id argument of ImagesCache.get must a string');
                 }
 
-                var fromDb = queryDb(instanceName + id);
-                if (fromDb){
-                    defer.resolve(fromDb);
-                } else {
-                    loadImageFromWeb(id, defer);
-                }
+                return database.get(instanceName + id)
+                    .then(function(data){
+                        defer.resolve(data);
+                    }, function(){
+                        loadImageFromWeb(id, defer);
+                    });
 
                 return defer.promise;
             }
