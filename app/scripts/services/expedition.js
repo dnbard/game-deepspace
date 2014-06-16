@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('evolutionApp')
-    .factory('Expedition', function (Starship, IntRandom, StringRandom) {
+    .factory('Expedition', function (Starship, IntRandom, StringRandom, ImageCache) {
         var instance = null;
 
         function getInstance(){
@@ -19,6 +19,11 @@ angular.module('evolutionApp')
             this.droids = IntRandom.get(2, 4);
 
             this.destination = StringRandom.solar();
+
+            new ImageCache().get('images/yeoman.png')
+                .then(function(image){
+                    debugger;
+                });
         }
 
         return { getInstance: getInstance };
