@@ -9,6 +9,10 @@ angular.module('evolutionApp')
         var localforage = window.localforage;
 
         function DB(){
+            this.clear = function(){
+                return localforage.clear();
+            }
+
             this.get = function(id){
                 var defer = $q.defer();
                 if (typeof id !== 'string'){
