@@ -4,12 +4,12 @@ angular.module('evolutionApp')
     .factory('ImageCache', function ($q, $http, DB, Environment) {
         var database = new DB();
 
+        if (Environment.development){
+            database.clear();
+        }
+
         function ImagesCache(instanceName){
             instanceName = instanceName || 'default/';
-
-            if (Environment.development){
-                database.clear();
-            }
 
             function saveImageToDb(url, image){
                 database.store(instanceName + url, image);
