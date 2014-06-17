@@ -22,7 +22,7 @@ angular.module('evolutionApp')
 
             new ImageCache().get('images/yeoman.png')
                 .then(function(image){
-                    debugger;
+
                 });
         }
 

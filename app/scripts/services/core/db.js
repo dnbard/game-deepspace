@@ -17,11 +17,30 @@ angular.module('evolutionApp')
                 }
 
                 localforage.getItem(id, function(data){
-                    if (data){
+                    if (!data || data === null){
                         defer.reject();
                     } else {
                         defer.resolve(data);
                     }
+                });
+
+                return defer.promise;
+            }
+
+            this.store = function(id, value){
+                var defer = $q.defer();
+                if (typeof id !== 'string'){
+                    defer.reject();
+                    throw new Error('Id argument of DB.store should be a string');
+                }
+
+                if (!value){
+                    defer.reject();
+                    throw new Error('Value argument of DB.store should be defined');
+                }
+
+                localforage.setItem(id, value, function(){
+                    defer.resolve();
                 });
 
                 return defer.promise;

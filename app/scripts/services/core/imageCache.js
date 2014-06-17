@@ -8,7 +8,7 @@ angular.module('evolutionApp')
             instanceName = instanceName || 'default/';
 
             function saveImageToDb(url, image){
-
+                database.store(instanceName + url, image);
             }
 
             function loadImageFromWeb(url, defer){
@@ -35,7 +35,7 @@ angular.module('evolutionApp')
                     throw new Error('Id argument of ImagesCache.get must a string');
                 }
 
-                return database.get(instanceName + id)
+                database.get(instanceName + id)
                     .then(function(data){
                         defer.resolve(data);
                     }, function(){
