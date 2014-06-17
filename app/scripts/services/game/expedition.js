@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('evolutionApp')
-    .factory('Expedition', function (Starship, IntRandom, StringRandom, ImageCache) {
+    .factory('Expedition', function (Starship, IntRandom, StringRandom, Environment) {
         var instance = null;
 
         function getInstance(){

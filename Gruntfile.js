@@ -367,6 +367,20 @@ module.exports = function (grunt) {
       ]
     },
 
+    'string-replace': {
+      inline: {
+        options: {
+          replacements: [{
+            pattern: 'undefined',
+            replacement: ''
+        }]
+      },
+        files: {
+          'dist/views/index.html': 'dist/views/index.html'
+        }
+      }
+    },
+
     // By default, your `index.html`'s <!-- Usemin block --> will take care of
     // minification. These next options are pre-configured if you do not wish
     // to use the Usemin blocks.
@@ -498,7 +512,8 @@ module.exports = function (grunt) {
     'cssmin',
     'uglify',
     'rev',
-    'usemin'
+    'usemin',
+    'string-replace:inline'
   ]);
 
   grunt.registerTask('heroku', function () {
