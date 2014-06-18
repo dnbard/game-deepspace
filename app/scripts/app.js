@@ -4,7 +4,8 @@ angular.module('evolutionApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ngRoute'
+  'ngRoute',
+  'angular-lodash'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider

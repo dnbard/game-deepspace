@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('evolutionApp')
-    .factory('Starship', function () {
+    .factory('Starship', function (StringRandom) {
         function Starship (){
-            this.name = 'UN Unity';
+            this.name = StringRandom.starship();
         }
 
         return Starship;
