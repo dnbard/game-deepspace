@@ -10,24 +10,24 @@ angular.module('evolutionApp')
 
         var ships = {
             first: ['Churchill', 'Daedalus', 'Explorer', 'Moonraker', 'Ranger', 'Shuttlecraft', 'Aries', 'Eagle', 'Friede', 'Hawk', 'Matflower', 'Anastasia', 'Axiom', 'Bilkis', 'Mongoose', 'Icarus', 'Lauryad', 'Lewis', 'Clark', 'Orbit', 'Ryvius', 'Hammerhead', 'Scorpio', 'Discovery', 'Unity', 'Cygnus', 'Valley', 'Amaterasu', 'Argonaut', 'Ark', 'Bellerophon', 'Derelict', 'Agamemnon', 'Hyperion', 'Excalibur', 'Liberator', 'Minbari', 'Nemesis', 'Nirvana', 'Protector', 'Orion', 'Prometheus', 'Macross', 'Pioneer', 'Normandy', 'Aurora'],
-            second: ['SSTO-TAV-<%- randomLittle %>B', 'X-<%- random %>', 'UN', 'USS', 'F-<%- random %>', 'SA-<%- randomLittle %>', 'NSEA'],
-            third: ['<%- random %>', 'Mk. <%- randomLittle %>', 'XD-<%- randomLittle %>', 'X', 'V']
+            second: ['SSTO-TAV-<%- randomlittle %>B', 'X-<%- random %>', 'UN', 'USS', 'F-<%- random %>', 'SA-<%- randomlittle %>', 'NSEA'],
+            third: ['<%- random %>', 'Mk. <%- randomlittle %>', 'XD-<%- randomlittle %>', 'X', 'V']
         }
 
         function getShip(){
             var rnd = IntRandom.get(0, 99), result;
 
-            if(rnd < 70){
-                result = generateOneWordName(ships.first);
+            if(rnd < 10){
+                result = generateOneWordName(ships.first, false);
             } else if (rnd < 85) {
-                result = generateTwoWordsName(ships.second, ships.first);
+                result = generateTwoWordsName(ships.second, ships.first, false);
             } else {
-                result = generateTwoWordsName(ships.first, ships.third);
+                result = generateTwoWordsName(ships.first, ships.third, false);
             }
 
             result = _.template(result, {
-                Randomlittle: IntRandom.get(0, 9),
-                Random: IntRandom.get(0, 99)
+                randomlittle: IntRandom.get(1, 9),
+                random: IntRandom.get(1, 99)
             });
 
             return result;
@@ -42,21 +42,34 @@ angular.module('evolutionApp')
             }
         }
 
-        function generateOneWordName(first){
-            return (first[IntRandom.get(0, first.length - 1)]).capitalize(true);;
+        function generateOneWordName(first, capitalize){
+            capitalize = capitalize === undefined? true : !!capitalize;
+            var result = (first[IntRandom.get(0, first.length - 1)]);
+            if (capitalize){
+                result = result.capitalize(true);
+            }
+            return result;
         }
 
-        function generateTwoWordsName(first, second){
-            return (first[IntRandom.get(0, first.length - 1)] + ' ' +
-                second[IntRandom.get(0, second.length - 1)])
-                .capitalize(true);
+        function generateTwoWordsName(first, second, capitalize){
+            capitalize = capitalize === undefined? true : !!capitalize;
+            var result =  (first[IntRandom.get(0, first.length - 1)] + ' ' +
+                second[IntRandom.get(0, second.length - 1)]);
+            if (capitalize){
+                result = result.capitalize(true);
+            }
+            return result;
         }
 
-        function generateThreeWordsName(first, second, third){
-            return (first[IntRandom.get(0, first.length - 1)] + ' ' +
+        function generateThreeWordsName(first, second, third, capitalize){
+            capitalize = capitalize === undefined? true : !!capitalize;
+            var result = (first[IntRandom.get(0, first.length - 1)] + ' ' +
                 second[IntRandom.get(0, second.length - 1)] + ' ' +
-                   third[IntRandom.get(0, third.length - 1)])
-                .capitalize(true);
+                   third[IntRandom.get(0, third.length - 1)]);
+            if (capitalize){
+                result = result.capitalize(true);
+            }
+            return result;
         }
 
         return {
