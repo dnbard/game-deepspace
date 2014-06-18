@@ -4,6 +4,7 @@
     padding: 12px;
     border: 3px solid skyblue;
     border-radius: 25px;
+    position: relative;
 }
 
 .header-caption{
@@ -22,4 +23,14 @@ input.form-control.dp{
 
 input.form-control.dp:focus{
     border: 2px solid rgba(135, 206, 235, 1);
+}
+
+.adviser{
+    border: 3px solid;
+    border-radius: 45px;
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    top: -10px;
+    left: -10px;
 }
