@@ -34,3 +34,7 @@ input.form-control.dp:focus{
     top: -10px;
     left: -10px;
 }
+
+p > b{
+    border-bottom: 1px dotted rgba(135, 206, 235, 0.5);
+}
