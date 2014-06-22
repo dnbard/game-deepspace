@@ -1,7 +1,164 @@
 'use strict';
 
+var biomes = {
+    arctic: {
+        colors:[
+            'rgb(203, 220, 222)',
+            'rgb(227, 235, 245)',
+            'rgb(246, 249, 250)'
+        ],
+        layers:[{
+            name: 'base'
+        },{
+            name: 'planet',
+            min: 1,
+            max: 3
+        },{
+            name: 'planet',
+            min: 1,
+            max: 1,
+            color: 'blue'
+        }]
+    },
+    barren: {
+        colors: [
+            'rgb(100, 62, 44)',
+            'rgb(140, 100, 60)',
+            'rgb(185, 134, 94)'
+        ],
+        layers: [{
+            name: 'base'
+        },{
+            name: 'planet',
+            min: 1,
+            max: 4
+        }, {
+            name: 'planet',
+            min: 0,
+            max: 1,
+            color: 'white'
+        }]
+    },
+    desert: {
+        colors: [
+            'rgb(147, 104, 60)',
+            'rgb(171, 137, 77)',
+            'rgb(190, 163, 100)'
+        ],
+        layers: [{
+            name: 'base'
+        },{
+            name: 'planet',
+            min: 1,
+            max: 4
+        }, {
+            name: 'planet',
+            min: 0,
+            max: 1,
+            color: 'white'
+        }]
+    },
+    gaia: {
+        colors: [
+            'rgb(107, 74, 33)',
+            'rgb(122, 91, 44)',
+            'rgb(141, 109, 60)'
+        ],
+        layers: [{
+            name: 'base'
+        },{
+            //forest TODO: set forest colors here
+            name: 'planet',
+            min: 1,
+            max: 3,
+            color: 'green'
+        },/*{
+            //mountain TODO: set mountain colors here
+            name: 'planet',
+            count: 1,
+            color: 'brown'
+        },*/{
+            name: 'planet',
+            count: 3,
+            color: 'blue'
+        },{
+            name: 'planet',
+            count: 1,
+            color: 'white'
+        }]
+    },
+    magma: {
+        colors: [
+            'rgb(63, 31, 31)',
+            'rgb(99, 53, 53)',
+            'rgb(153, 83, 83)',
+            'rgb(26, 26, 26)',
+            'rgb(80, 52, 52)',
+            'rgb(103, 72, 72)'
+        ],
+        layers: [{
+            name: 'base'
+        },{
+            name: 'planet',
+            count: 1
+        },{
+            name: 'planet',
+            count: 1,
+            color: 'red'
+        }]
+    },
+    empty: {
+        colors: [
+            'rgb(89, 65, 52)',
+            'rgb(124, 100, 74)',
+            'rgb(167, 136, 112)'
+        ],
+        layers: [{
+            name: 'base'
+        },{
+            name: 'planet',
+            min: 1,
+            max: 4
+        }]
+    }
+}
+
 angular.module('evolutionApp')
     .factory('PlanetGenerator', function ($q, ImageUtility, IntRandom) {
+        function getRandomArrayElement(array){
+            if (_.isArray(array)){
+                return array[IntRandom.get(0, array.length - 1)];
+            } else if (_.isObject(array)){
+                array = Object.keys(array);
+                return array[IntRandom.get(0, array.length - 1)];
+            }
+        }
+
+        var handlers = {
+            'base': function(array, biome, layer){
+                var color = pusher.color(getRandomArrayElement(biome.colors));
+                color = getRandomArrayElement(color.hueRange(20, 10)).hex6();
+                array.push({
+                    image: 'images/shapes/planet-base.png',
+                    overlay: color
+                });
+            },
+            'planet': function(array, biome, layer){
+                var count = layer.count ? layer.count : IntRandom.get(layer.min, layer.max);
+                for(var i = 0; i < count; i ++){
+                    var color = layer.color? pusher.color(layer.color):
+                        pusher.color(getRandomArrayElement(biome.colors));
+                    color = getRandomArrayElement(color.hueRange(20, 10)).hex6();
+                    array.push({
+                        image: _.template('images/shapes/planet${rand}.png', {
+                            rand: IntRandom.get(0, 64)
+                        }),
+                        overlay: color
+                    });
+                }
+            }
+        }
+
         function createLayer(layer){
             var canvas, ctx, img = layer.image;
 
@@ -29,31 +186,14 @@ angular.module('evolutionApp')
             return canvas? canvas : img;
         }
 
-        function createPlanetConfig(){
+        function createPlanetConfig(biomeType){
+            var biome = biomes[biomeType];
             var config = [];
 
-            config.push({
-                image: 'images/shapes/planet-base.png',
-                overlay: 'darkgreen'
+            _.each(biome.layers, function(layer){
+                var handler = handlers[layer.name];
+                handler(config, biome, layer);
             });
-
-            for(var i = 0; i < IntRandom.get(1, 4); i ++){
-                config.push({
-                    image: _.template('images/shapes/planet${water}.png', {
-                        water: IntRandom.get(0, 64)
-                    }),
-                    overlay: 'blue'
-                });
-            }
-
-            for(var i = 0; i < IntRandom.get(1, 2); i ++){
-                config.push({
-                    image: _.template('images/shapes/planet${cloud}.png', {
-                        cloud: IntRandom.get(0, 64)
-                    }),
-                    overlay: 'white'
-                });
-            }
 
             config.push({
                 image: _.template('images/shapes/planet-shadow${shadow}.png', {
@@ -64,9 +204,10 @@ angular.module('evolutionApp')
             return config;
         }
 
-        function generate(){
+        function generate(biomeType){
+            biomeType = biomeType? biomeType : getRandomArrayElement(biomes);
             var defer = $q.defer(),
-                config = createPlanetConfig(),
+                config = createPlanetConfig(biomeType),
                 loadScript = [];
 
             _.each(config, function(cfg){
