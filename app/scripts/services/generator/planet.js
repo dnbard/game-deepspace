@@ -34,18 +34,32 @@ angular.module('evolutionApp')
 
             config.push({
                 image: 'images/shapes/planet-base.png',
-                overlay: 'brown'
+                overlay: 'darkgreen'
             });
+
+            for(var i = 0; i < IntRandom.get(1, 4); i ++){
+                config.push({
+                    image: _.template('images/shapes/planet${water}.png', {
+                        water: IntRandom.get(0, 64)
+                    }),
+                    overlay: 'blue'
+                });
+            }
+
+            for(var i = 0; i < IntRandom.get(1, 2); i ++){
+                config.push({
+                    image: _.template('images/shapes/planet${cloud}.png', {
+                        cloud: IntRandom.get(0, 64)
+                    }),
+                    overlay: 'white'
+                });
+            }
 
             config.push({
-                image: 'images/shapes/planet0.png',
-                overlay: 'blue'
+                image: _.template('images/shapes/planet-shadow${shadow}.png', {
+                    shadow: IntRandom.get(0, 9)
+                })
             });
-
-            var shadow = 'images/shapes/planet-shadow${ shadow}.png';
-            shadow = _.template(shadow, {shadow: IntRandom.get(0, 9)});
-
-            config.push({ image: shadow });
 
             return config;
         }
