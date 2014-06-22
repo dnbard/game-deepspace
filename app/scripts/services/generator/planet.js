@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('evolutionApp')
-    .factory('PlanetGenerator', function ($q, ImageUtility) {
+    .factory('PlanetGenerator', function ($q, ImageUtility, IntRandom) {
         function createLayer(layer){
             var canvas, ctx, img = layer.image;
 
@@ -29,16 +29,30 @@ angular.module('evolutionApp')
             return canvas? canvas : img;
         }
 
+        function createPlanetConfig(){
+            var config = [];
+
+            config.push({
+                image: 'images/shapes/planet-base.png',
+                overlay: 'brown'
+            });
+
+            config.push({
+                image: 'images/shapes/planet0.png',
+                overlay: 'blue'
+            });
+
+            var shadow = 'images/shapes/planet-shadow${ shadow}.png';
+            shadow = _.template(shadow, {shadow: IntRandom.get(0, 9)});
+
+            config.push({ image: shadow });
+
+            return config;
+        }
+
         function generate(){
             var defer = $q.defer(),
-                config = [{
-                        image: 'images/shapes/planet-base0.png'
-                    }, {
-                        image: 'images/shapes/planet0.png',
-                        overlay: 'blue'
-                    }, {
-                        image: 'images/shapes/planet-shadow0.png'
-                    }],
+                config = createPlanetConfig(),
                 loadScript = [];
 
             _.each(config, function(cfg){
