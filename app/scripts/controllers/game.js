@@ -5,7 +5,7 @@ var pages = {
 }
 
 angular.module('evolutionApp')
-    .controller('GameCtrl', function($scope, Expedition, SolarGenerator){
+    .controller('GameCtrl', function($scope, Expedition, PlanetGenerator){
         $scope.page = pages.START;
 
         $scope.expedition = Expedition.getInstance();
@@ -13,7 +13,7 @@ angular.module('evolutionApp')
 
         $scope.testImage = null;
 
-        SolarGenerator.generate().then(function(sun){
+        PlanetGenerator.generate().then(function(sun){
             $scope.testImage = sun;
         });
     });
